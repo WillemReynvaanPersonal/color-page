@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>List of Uploaded Images</title>
+  </head>
+  <body>
+    <h1>Uploaded Images</h1>
+    <ul>
+      {% for image in images %}
+        <li>
+          <a href="{{ url_for('list_images', filename=image) }}">{{ image }}</a>
+          <form action="{{ url_for('process_image', filename=image) }}" method="get" style="display:inline;">
+            <button type="submit">Process</button>
+          </form>
+        </li>
+      {% endfor %}
+    </ul>
+    {% if selected_image %}
+      <h2>Selected Image</h2>
+      <img src="{{ url_for('display_image', filename=selected_image) }}" alt="Selected Image">
+    {% endif %}
+    <a href="{{ url_for('upload_form') }}">Upload another image</a>
+  </body>
+</html>

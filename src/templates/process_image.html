@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Process Image</title>
+  </head>
+  <body>
+    <h1>Process Image: {{ filename }}</h1>
+    <form action="{{ url_for('process_image', filename=filename) }}" method="post">
+      <label for="threshold1">Threshold 1:</label>
+      <input type="range" id="threshold1" name="threshold1" min="0" max="255" value="100" oninput="this.nextElementSibling.value = this.value">
+      <output>100</output>
+      <br>
+      <label for="threshold2">Threshold 2:</label>
+      <input type="range" id="threshold2" name="threshold2" min="0" max="255" value="200" oninput="this.nextElementSibling.value = this.value">
+      <output>200</output>
+      <br>
+      <button type="submit">Process</button>
+    </form>
+    {% if processed_image %}
+      <h2>Processed Image</h2>
+      <img src="{{ url_for('display_processed_image', filename=processed_image) }}" alt="Processed Image">
+    {% endif %}
+    <a href="{{ url_for('list_images') }}">Back to Image List</a>
+  </body>
+</html>
